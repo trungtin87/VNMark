@@ -19,8 +19,8 @@
   --mau-nhan-nhat: #e5efec;
   --mau-canh-bao: #b5542a; /* đất nung — cảnh báo / chưa lưu */
   --mau-vien: #dedad0;
-  --bo-chu-giao-dien: "GeistMono-Variable", "Helvetica Neue", system-ui, Roboto, Arial, sans-serif;
-  --bo-chu-noi-dung: "NotoSerif-Variable", serif;
+  --bo-chu-giao-dien: "NotoSerif-Variable", "Helvetica Neue", system-ui, Roboto, Arial, sans-serif;
+  --bo-chu-noi-dung: "GeistMono-Variable", serif;
   --bo-chu-ma: "Noto Sans Mono", "Consolas", "SFMono-Regular", Menlo, monospace;
 }
 
