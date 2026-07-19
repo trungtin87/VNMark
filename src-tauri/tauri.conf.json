@@ -17,8 +17,7 @@
         "height": 780,
         "minWidth": 380,
         "minHeight": 480,
-        "resizable": true,
-        "fileDropEnabled": true
+        "resizable": true
       }
     ],
     "security": {
