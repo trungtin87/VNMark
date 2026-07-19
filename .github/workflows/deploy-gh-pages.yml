@@ -1,0 +1,57 @@
+name: Deploy VNMark len GitHub Pages
+
+# Lưu ý: bản deploy lên GitHub Pages chỉ chạy được ở "chế độ trình duyệt"
+# (xem src/tien-ich/cauNoiTauri.js) — không có lõi Rust/Tauri nên mở/lưu
+# file dùng <input type=file> và tải xuống thay vì hộp thoại hệ điều hành,
+# mẫu Front Matter lưu tạm trong localStorage của trình duyệt. Đây là hành
+# vi mong đợi, không phải lỗi.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Lấy mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Cài Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Cài phụ thuộc
+        run: npm ci
+
+      - name: Build (chế độ trình duyệt)
+        run: npm run build
+        env:
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+
+      - name: Chuẩn bị Pages
+        uses: actions/configure-pages@v4
+
+      - name: Tải lên artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy lên GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

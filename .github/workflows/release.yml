@@ -1,0 +1,60 @@
+name: Build & Phat hanh VNMark (Release desktop)
+
+# Chạy khi đẩy một tag dạng v0.1.0, v1.2.3... hoặc bấm chạy tay từ tab Actions.
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  release:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: "macos-latest" # Apple Silicon (M1/M2/M3)
+            args: "--target aarch64-apple-darwin"
+          - platform: "macos-latest" # Intel
+            args: "--target x86_64-apple-darwin"
+          - platform: "ubuntu-22.04" # .deb + .AppImage
+            args: ""
+          - platform: "windows-latest" # .msi + .exe (NSIS)
+            args: ""
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Lấy mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Cài Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Cài thư viện hệ thống (chỉ Linux)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - name: Cài Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - name: Cài phụ thuộc npm
+        run: npm ci
+
+      - name: Build & tạo bản phát hành
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "VNMark ${{ github.ref_name }}"
+          releaseBody: "Xem lịch sử thay đổi (changelog) để biết chi tiết phiên bản này."
+          releaseDraft: true
+          prerelease: false
+          args: ${{ matrix.args }}
