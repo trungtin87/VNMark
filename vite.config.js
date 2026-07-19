@@ -10,7 +10,7 @@ export default defineConfig({
   // Khi deploy lên GitHub Pages ở dạng project page (username.github.io/ten-repo),
   // toàn bộ asset phải trỏ vào /ten-repo/ chứ không phải /. Đặt biến môi
   // trường VITE_BASE_PATH khi build (xem .github/workflows/deploy-gh-pages.yml).
-  base: process.env.VITE_BASE_PATH || "/",
+  base: process.env.VITE_BASE_PATH || "/VNMark/",
   server: {
     port: 1420,
     strictPort: true,
