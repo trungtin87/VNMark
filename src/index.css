@@ -19,29 +19,29 @@
   --mau-nhan-nhat: #e5efec;
   --mau-canh-bao: #b5542a; /* đất nung — cảnh báo / chưa lưu */
   --mau-vien: #dedad0;
-  --bo-chu-giao-dien: -apple-system, "Inter", "Helvetica Neue", system-ui, Roboto, Arial, sans-serif;
-  --bo-chu-noi-dung: Georgia, "Times New Roman", "Noto Serif", serif;
-  --bo-chu-ma: ui-monospace, "Noto Mono", "Consolas", "SFMono-Regular", Menlo, monospace;
+  --bo-chu-giao-dien: -apple-system, "Inter-Variable", "Helvetica Neue", system-ui, Roboto, Arial, sans-serif;
+  --bo-chu-noi-dung: Georgia, "Times New Roman", "NotoSerif-Variable", serif;
+  --bo-chu-ma: ui-monospace, "Noto Sans Mono", "Consolas", "SFMono-Regular", Menlo, monospace;
 }
 
 /* Khai báo font-face cho các font được dùng trong ứng dụng. Tất cả đều là font
    đẹp, phổ biến, miễn phí, và có thể tải về để dùng offline. */
 
 @font-face {
-  font-family: "Inter";
-  src: url("./assets/fonts/Inter-VariableFont_opsz,wght.ttf") format("ttf");
+  font-family: "Inter-Variable";
+  src: url("./assets/fonts/Inter-Variable.ttf") format("ttf");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: "Noto mono";
+  font-family: "Noto Sans Mono";
   src: url("./assets/fonts/NotoSansMono-Regular.ttf") format("ttf");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: "Noto Serif";
-  src: url("./assets/fonts/NotoSerif-VariableFont_wdth,wght.ttf") format("ttf");
+  font-family: "NotoSerif-Variable";
+  src: url("./assets/fonts/NotoSerif-Variable.ttf") format("ttf");
   font-weight: 400;
   font-style: normal;
 }
