@@ -254,6 +254,26 @@ button {
   margin-right: 0.3rem;
 }
 
+/* Thanh công cụ riêng cho bảng — chỉ hiện khi con trỏ đang ở trong một
+   bảng, cho phép thêm/xoá hàng-cột, gộp/tách ô mà nút "Chèn bảng" (chỉ
+   tạo bảng 3x3 ban đầu) không làm được. flex-basis:100% để luôn xuống
+   dòng riêng, tách biệt khỏi thanh công cụ định dạng chung phía trên. */
+.thanh-cong-cu-bang {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-top: 0.35rem;
+  padding-top: 0.4rem;
+  border-top: 1px dashed var(--mau-vien);
+}
+.thanh-cong-cu-bang__nhan {
+  font-size: 0.72rem;
+  color: var(--mau-muc-nhat);
+  margin-right: 0.4rem;
+  white-space: nowrap;
+}
+
 /* ---------- Menu nổi (bubble menu) ---------- */
 .menu-noi {
   display: flex;

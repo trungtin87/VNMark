@@ -105,6 +105,43 @@ export default function ThanhCongCuDinhDang({ editor, onYeuCauChonAnh, onBatTapT
       <div className="gach-phan-cach" />
       <button className="nut-cong-cu" title="Chế độ tập trung viết" onClick={onBatTapTrung}>⛶</button>
       <button className="nut-cong-cu nut-mo-phieu-tren-dien-thoai" title="Front Matter" onClick={onMoPhieuTrenDienThoai}>▤</button>
+
+      {editor.isActive("table") && (
+        <div className="thanh-cong-cu-bang">
+          <span className="thanh-cong-cu-bang__nhan">Bảng:</span>
+
+          <div className="nhom-cong-cu">
+            <button className="nut-cong-cu" title="Thêm hàng phía trên" onClick={() => editor.chain().focus().addRowBefore().run()}>⬆➕</button>
+            <button className="nut-cong-cu" title="Thêm hàng phía dưới" onClick={() => editor.chain().focus().addRowAfter().run()}>⬇➕</button>
+            <button className="nut-cong-cu" title="Xoá hàng hiện tại" onClick={() => editor.chain().focus().deleteRow().run()}>⬍➖</button>
+          </div>
+
+          <div className="gach-phan-cach" />
+
+          <div className="nhom-cong-cu">
+            <button className="nut-cong-cu" title="Thêm cột bên trái" onClick={() => editor.chain().focus().addColumnBefore().run()}>⬅➕</button>
+            <button className="nut-cong-cu" title="Thêm cột bên phải" onClick={() => editor.chain().focus().addColumnAfter().run()}>➡➕</button>
+            <button className="nut-cong-cu" title="Xoá cột hiện tại" onClick={() => editor.chain().focus().deleteColumn().run()}>⬌➖</button>
+          </div>
+
+          <div className="gach-phan-cach" />
+
+          <div className="nhom-cong-cu">
+            <button className="nut-cong-cu" title="Gộp các ô đang chọn" onClick={() => editor.chain().focus().mergeCells().run()}>⛝</button>
+            <button className="nut-cong-cu" title="Tách ô đã gộp" onClick={() => editor.chain().focus().splitCell().run()}>⛞</button>
+            <button
+              className={`nut-cong-cu ${nutDangBat(editor.isActive("tableHeader"))}`}
+              title="Bật/tắt hàng tiêu đề"
+              onClick={() => editor.chain().focus().toggleHeaderRow().run()}
+            >
+              H▤
+            </button>
+          </div>
+
+          <div className="gach-phan-cach" />
+          <button className="nut-cong-cu" title="Xoá cả bảng" onClick={() => editor.chain().focus().deleteTable().run()}>🗑</button>
+        </div>
+      )}
     </div>
   );
 }
